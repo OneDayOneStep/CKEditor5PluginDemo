@@ -28,7 +28,7 @@ export default class IMGToolbarUI extends Plugin {
             this.listenTo(view, "execute", () => {
                 // console.log(editor);
                 insertImage(editor.model, {
-                    src: "https://t7.baidu.com/it/u=3455716679,610864806&fm=193&f=GIF"
+                    src: "https://img2.baidu.com/it/u=779349149,824104843&fm=26&fmt=auto"
                 });
                 // console.log("toobar-ui execute");
                 // editor.execute(COMMAND_NAME__IMG)

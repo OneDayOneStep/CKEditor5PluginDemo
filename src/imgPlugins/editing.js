@@ -1,9 +1,13 @@
 
 import Plugin from "@ckeditor/ckeditor5-core/src/plugin";
+import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 import IMGCommand from "./command";
 import { COMMAND_NAME__IMG, SCHEMA_NAME__IMG } from "./constant";
 
 export default class IMGEditing extends Plugin {
+    static get requires() {
+        return [Widget];
+    }
     static get pluginName() {
         return "IMGEditing";
     }
