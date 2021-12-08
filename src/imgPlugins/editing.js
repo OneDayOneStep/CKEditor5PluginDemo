@@ -1,11 +1,11 @@
 
 import Plugin from "@ckeditor/ckeditor5-core/src/plugin";
-import BoldCommand from "./command";
-import { COMMAND_NAME__BOLD, SCHEMA_NAME__BOLD } from "./constant";
+import IMGCommand from "./command";
+import { COMMAND_NAME__IMG, SCHEMA_NAME__IMG } from "./constant";
 
-export default class BoldEditing extends Plugin {
+export default class IMGEditing extends Plugin {
     static get pluginName() {
-        return "BoldEditing";
+        return "IMGEditing";
     }
     init() {
         const editor = this.editor;
@@ -13,14 +13,14 @@ export default class BoldEditing extends Plugin {
         this._defineSchema();
         this._defineConverters();
 
-        // 注册一个 BoldCommand 命令
-        editor.commands.add(COMMAND_NAME__BOLD, new BoldCommand(editor));
+        // 注册一个 IMGCommand 命令
+        editor.commands.add(COMMAND_NAME__IMG, new IMGCommand(editor));
     }
 
     // 注册 schema
     _defineSchema() {
         const schema = this.editor.model.schema;
-        schema.extend("$text", { allowAttributes: SCHEMA_NAME__BOLD });
+        schema.extend("$text", { allowAttributes: SCHEMA_NAME__IMG });
     }
 
     // 定义转换器
@@ -28,7 +28,7 @@ export default class BoldEditing extends Plugin {
         const conversion = this.editor.conversion;
 
         conversion.attributeToElement({
-            model: SCHEMA_NAME__BOLD,
+            model: SCHEMA_NAME__IMG,
             view: "strong",
             upcastAlso: ["b"],
         });

@@ -1,21 +1,22 @@
 import Command from "@ckeditor/ckeditor5-core/src/command";
-import { SCHEMA_NAME__BOLD } from "./constant";
+import { SCHEMA_NAME__IMG } from "./constant";
 
-export default class BoldCommand extends Command {
+export default class IMGCommand extends Command {
     constructor(editor) {
         super(editor);
-        this.attributeKey = SCHEMA_NAME__BOLD;
+        this.attributeKey = SCHEMA_NAME__IMG;
     }
 
     refresh() {
+        console.log("command refresh");
         const model = this.editor.model;
         const selection = model.document.selection;
 
-        // 如果选中的文本含有 bold 属性，设置 value 为 true，
+        // 如果选中的文本含有 IMG 属性，设置 value 为 true，
         // 由于已在 toolbar-ui 中关联，当 value 为 true 时会高亮工具栏按钮
         this.value = this._getValueFromFirstAllowedNode();
 
-        // 校验选中的 Schema 是否允许 bold 属性，若不允许则禁用按钮
+        // 校验选中的 Schema 是否允许 IMG 属性，若不允许则禁用按钮
         this.isEnabled = model.schema.checkAttributeInSelection(
             selection,
             this.attributeKey
@@ -23,13 +24,15 @@ export default class BoldCommand extends Command {
     }
 
     execute() {
+        console.log("command start");
         const model = this.editor.model;
         const selection = model.document.selection;
 
         const value = !this.value;
 
-        // 对选中文本设置 bold 属性
+        // 对选中文本设置 IMG 属性
         model.change((writer) => {
+            console.log("command writer", writer);
             if (selection.isCollapsed) {
                 if (value) {
                     writer.setSelectionAttribute(this.attributeKey, true);
