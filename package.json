@@ -18,19 +18,14 @@
     "@ckeditor/ckeditor5-ui": "^31.1.0",
     "@ckeditor/ckeditor5-utils": "^31.1.0",
     "@ckeditor/ckeditor5-widget": "^31.1.0",
-    "esbuild-plugin-raw-loader": "^0.1.4",
     "postcss-mixins": "^9.0.1",
     "postcss-nesting": "^10.0.2",
-    "raw-loader": "^4.0.2",
-    "vite-raw-plugin": "^1.0.1",
-    "vite-svg-loader": "^3.1.0",
     "vue": "^3.2.23"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-inspector": "^2.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@vitejs/plugin-vue": "^1.10.2",
-    "rollup-plugin-svg-sprites": "^1.1.1",
     "vite": "^2.7.0"
   }
 }

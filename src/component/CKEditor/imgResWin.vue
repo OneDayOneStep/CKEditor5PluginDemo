@@ -1,28 +1,59 @@
 <script>
-import {defineComponent, ref } from "vue";
+import {defineComponent, ref, reactive, onMounted } from "vue";
+import insertImage from "./imgPlugin/insertImage";
+import connect from "./imgPlugin/connect";
 export default defineComponent({
-  setup() {
+  props: {
+    show: {
+      default: false,
+      type: Boolean
+    },
+    emits: [
+      'update:show'
+    ]
+  },
+  setup(props, { emit }) {
     let selectedIndex = ref(1);
     let changeSelect = function(index) {
       selectedIndex.value = index;
     }
+    let imgList = reactive([]);
+    onMounted(() => {
+      const mockData = [{
+        src: "https://img0.baidu.com/it/u=2089938236,2600489549&fm=26&fmt=auto",
+      },{
+        src: "https://img2.baidu.com/it/u=2840876380,2046257499&fm=26&fmt=auto",
+      },{
+        src: "https://img2.baidu.com/it/u=3745443056,3700782634&fm=26&fmt=auto",
+      }];
+      // 模拟请求数据
+      setTimeout(() => {
+        imgList.push(...mockData);
+      }, 2000);
+    });
+    const confirm = function() {
+      insertImage(connect.editorObj.model, imgList[selectedIndex.value]);
+      emit("update:show", false);
+    }
     return {
       selectedIndex,
-      changeSelect
+      changeSelect,
+      imgList,
+      confirm
     }
   }
 });
 </script>
 
 <template>
-  <div class="imgResWin">
+  <div class="imgResWin" v-show="show">
     <div class="imgResWinCon">
       <div class="imgResWinConImgs">
-        <div @click="changeSelect(0)" :class="{ selected: selectedIndex === 0 }"><img src="./imgs/img_0.png" /></div>
-        <div @click="changeSelect(1)" :class="{ selected: selectedIndex === 1 }"><img src="./imgs/img_1.png" /></div>
-        <div @click="changeSelect(2)" :class="{ selected: selectedIndex === 2 }"><img src="./imgs/img_2.png" /></div>
+        <div v-for="(img, index) in imgList" :key="img.src" @click="changeSelect(index)" :class="{ selected: selectedIndex === index }">
+          <img :src="img.src" />
+        </div>
       </div>
-      <span class="confirm">确定</span>
+      <span class="confirm" @click="confirm">确定</span>
     </div>
   </div>
 </template>

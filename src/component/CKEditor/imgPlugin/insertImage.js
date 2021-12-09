@@ -1,6 +1,7 @@
 import { findOptimalInsertionRange } from "@ckeditor/ckeditor5-widget/src/utils";
 
 export default function insertImage(model, attributes = {}) {
+    console.log(model);
     if (!attributes || !attributes.src) {
         return;
     }
